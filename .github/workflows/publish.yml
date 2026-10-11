@@ -1,5 +1,6 @@
 # 쎈Cut 릴리스 게시: 코드 저장소(ssencut)의 scripts/release.cjs가 서명한 파일을 publish 브랜치에 올리고 이 작업을 실행한다.
 # 이 작업은 매니페스트 전자서명과 파일 크기·SHA-256을 확인한 뒤에만 공개 릴리스를 만들고, publish 브랜치를 지운다.
+# 확인 스크립트(.github/scripts/publish.cjs)는 main에서 가져오고, publish 브랜치는 자료(pub/)로만 쓴다.
 name: publish
 on:
   workflow_dispatch:
@@ -15,16 +16,25 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: 확인 스크립트(main)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: 올린 파일(publish 브랜치)
+        uses: actions/checkout@v4
         with:
           ref: ${{ inputs.branch }}
+          path: pub
           fetch-depth: 1
       - name: 파일 합치기·서명·체크섬 확인
-        run: node .github/scripts/publish.cjs prepare
+        working-directory: pub
+        run: node "$GITHUB_WORKSPACE/.github/scripts/publish.cjs" prepare
       - name: 릴리스 만들기
+        working-directory: pub
         env:
           GH_TOKEN: ${{ github.token }}
-        run: node .github/scripts/publish.cjs release
+        run: node "$GITHUB_WORKSPACE/.github/scripts/publish.cjs" release
       - name: publish 브랜치 지우기
         if: always()
         env:
