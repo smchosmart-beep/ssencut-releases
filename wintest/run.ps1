@@ -63,7 +63,7 @@ $reg = Get-ItemProperty $key -ErrorAction SilentlyContinue
 Check '앱 목록 등록' ($reg -and $reg.DisplayVersion -eq $V -and $reg.Publisher -eq 'Ssen Tools') "$($reg.DisplayName) $($reg.DisplayVersion) $($reg.Publisher) $($reg.EstimatedSize)KB"
 $desk = [Environment]::GetFolderPath('Desktop'); $progs = [Environment]::GetFolderPath('Programs')
 Check '바로 가기(바탕화면·시작 메뉴)' ((Test-Path (Join-Path $desk '쎈Cut.lnk')) -and (Test-Path (Join-Path $progs '쎈Cut.lnk')))
-try { $sh = New-Object -ComObject WScript.Shell; $lnk = $sh.CreateShortcut((Join-Path $desk '쎈Cut.lnk')); Check '바로 가기 대상' ($lnk.TargetPath -eq (Join-Path $inst 'SsenCut.exe')) "$($lnk.TargetPath) / 아이콘 $($lnk.IconLocation)" } catch { Log "바로 가기 읽기 실패: $_" }
+try { $it = (New-Object -ComObject Shell.Application).NameSpace($desk).ParseName('쎈Cut.lnk'); $lnk = $it.GetLink; Check '바로 가기 대상' ($lnk.Path -eq (Join-Path $inst 'SsenCut.exe')) "$($lnk.Path) / 작업 폴더 $($lnk.WorkingDirectory)" } catch { Log "바로 가기 읽기 실패: $_" }
 Get-ChildItem $inst -Recurse -File | Measure-Object Length -Sum | ForEach-Object { Log "설치 폴더 $($_.Count)개 파일, $([math]::Round($_.Sum/1MB))MB" }
 
 # 3) 실행
