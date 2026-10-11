@@ -1,0 +1,23 @@
+# 릴리스 지우기: delete/v<버전> 브랜치를 push하면 그 릴리스와 태그를 지우고 브랜치도 지운다.
+# (Claude 작업 환경은 릴리스를 직접 지울 수 없어서 이렇게 한다)
+name: delete-release
+on:
+  push:
+    branches: ['delete/**']
+permissions:
+  contents: write
+concurrency: publish
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 릴리스·태그 지우기
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME#delete/}"
+          gh release delete "$TAG" --cleanup-tag --yes
+      - name: 요청 브랜치 지우기
+        if: always()
+        run: git push origin --delete "${GITHUB_REF_NAME}" || true

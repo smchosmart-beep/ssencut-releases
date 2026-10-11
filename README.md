@@ -4,11 +4,14 @@
 프로그램 코드는 여기에 없습니다.
 
 ## 받기
-[최신 릴리스](https://github.com/smchosmart-beep/ssencut-releases/releases/latest)에서 받으세요.
+[최신 릴리스](https://github.com/smchosmart-beep/ssencut-releases/releases/latest)에서 받으세요. (정식 배포 1.0.0부터)
 
-- **처음 설치하는 PC, 또는 1.7.4 이하를 쓰는 PC:** `SsenCut-<버전>.exe` (전체 설치본, AI 엔진 포함 약 400MB) — 한 파일로 받아 실행하세요.
-- **설치된 PC를 직접 업데이트:** `SsenCut-<버전>-small.exe` (작은 업데이트, 앱 파일만 바꿈) — 같은 엔진의 전체 설치본 위에서만 설치됩니다.
-- **1.7.6 이상:** 쎈Cut이 새 버전을 알려 줍니다. 오른쪽 아래 알림에서 [업데이트] → [다시 시작해서 적용]을 누르세요.
+- **처음 설치:** `SsenCut-<버전>.exe` (전체 설치본, AI 엔진 포함 약 400MB) — 받아 실행 → [다음] → [마침]. 관리자 권한은 필요 없습니다.
+  서명이 없는 새 프로그램이라 "Windows의 PC 보호" 창이 뜨면 [추가 정보] → [실행]을 누르세요.
+- **업데이트:** 쎈Cut이 새 버전을 알려 줍니다. 오른쪽 아래 알림에서 [업데이트] → [다시 시작해서 적용]을 누르세요.
+  직접 하려면 `SsenCut-<버전>-small.exe`(작은 업데이트)를 실행하세요 — 같은 AI 엔진의 쎈Cut이 설치된 PC에서만 설치됩니다.
+- **시험판(1.7.x)을 쓰던 PC:** 1.0.0 전체 설치본을 한 번 설치하세요. 작업은 그대로 남습니다.
+- **제거:** [설정 → 앱 → 설치된 앱]에서 쎈Cut 제거(프로젝트·내보낸 영상은 남음).
 
 ## 자동 업데이트 정보
 - `ssencut-update.json` — 최신 버전·파일 크기·SHA-256을 담은 매니페스트. Ed25519 전자서명이 붙어 있고, 쎈Cut은 앱 안의 공개키로 서명을 확인한 뒤에만 업데이트합니다.
@@ -16,3 +19,5 @@
 
 ## 게시 방법(관리용)
 코드 저장소의 `scripts/release.cjs`가 서명한 파일을 `publish` 브랜치에 올리고 `publish` 작업(.github/workflows/publish.yml)을 실행합니다. 이 작업은 매니페스트 전자서명과 파일 크기·SHA-256을 확인한 뒤에만 릴리스를 만들고 `publish` 브랜치를 지웁니다.
+- 릴리스 지우기: `delete/v<버전>` 브랜치 push → `delete-release` 작업이 릴리스·태그·브랜치를 지웁니다.
+- Windows 실기 시험: `wintest/<이름>` 브랜치 push → windows-latest에서 `wintest/run.ps1`(게시본 Defender 검사·무인 설치·실행·작은 업데이트·제거) → 결과 `wintest-results/<이름>` 브랜치.

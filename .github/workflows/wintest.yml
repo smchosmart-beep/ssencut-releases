@@ -1,0 +1,32 @@
+# 쎈Cut Windows 실기 시험: wintest/** 브랜치를 push하면 windows-latest에서 wintest/run.ps1을 실행하고,
+# 결과(wintest-out/)를 wintest-results/<브랜치 이름> 브랜치로 올린 뒤 시험 브랜치를 지운다. (쎈Clean과 같은 방식)
+name: wintest
+on:
+  push:
+    branches: ['wintest/**']
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: windows-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - name: 시험
+        shell: pwsh
+        run: ./wintest/run.ps1 -Out "$PWD/wintest-out"
+      - name: 결과 올리기
+        if: always()
+        shell: bash
+        run: |
+          NAME="${GITHUB_REF_NAME#wintest/}"
+          git config user.name "ssencut-bot"; git config user.email "ssencut-bot@users.noreply.github.com"
+          git checkout --orphan "wintest-results/$NAME"
+          git rm -rq --cached . || true
+          git add -f wintest-out
+          git commit -qm "wintest results $NAME"
+          git push -f origin "wintest-results/$NAME"
+          for b in $(git ls-remote --heads origin 'wintest-results/*' | awk '{print $2}' | sed 's#refs/heads/##'); do
+            [ "$b" != "wintest-results/$NAME" ] && git push origin --delete "$b" || true
+          done
+          git push origin --delete "${GITHUB_REF_NAME}" || true
