@@ -35,6 +35,8 @@ $repo = 'smchosmart-beep/ssencut-releases'
 $manUrl = if ($tag) { "https://github.com/$repo/releases/download/$tag/ssencut-update.json" } else { "https://github.com/$repo/releases/latest/download/ssencut-update.json" }
 Log "Windows: $((Get-CimInstance Win32_OperatingSystem).Caption) $([Environment]::OSVersion.Version)  매니페스트: $manUrl"
 $raw = Invoke-RestMethod $manUrl; $m = $raw.signed | ConvertFrom-Json; $V = $m.version
+# 전체 설치본은 지난 버전일 수 있음(작은 업데이트만 낸 버전) → 설치 직후 확인은 전체 설치본 버전으로, 작은 업데이트 뒤 확인은 최신 버전으로
+$VF = if ($m.full.url -match 'SsenCut-([0-9.]+)\.exe$') { $Matches[1] } else { $V }
 Log "버전 $V  small $($m.small.size)B  full $($m.full.size)B"
 $dl = Join-Path $env:RUNNER_TEMP 'ssencut-dl'; New-Item -ItemType Directory -Force -Path $dl | Out-Null
 $full = Join-Path $dl ($m.full.url -split '/')[-1]; $small = Join-Path $dl ($m.small.url -split '/')[-1]
@@ -60,7 +62,7 @@ $missing = $need | Where-Object { -not (Test-Path (Join-Path $inst $_)) }
 Check '설치 파일' (-not $missing) ("없음: " + ($missing -join ', '))
 $exeSize = (Get-Item (Join-Path $inst 'SsenCut.exe')).Length; Check '실행기는 작은 exe(앱을 품지 않음)' ($exeSize -lt 1MB) "$exeSize B"
 $reg = Get-ItemProperty $key -ErrorAction SilentlyContinue
-Check '앱 목록 등록' ($reg -and $reg.DisplayVersion -eq $V -and $reg.Publisher -eq 'Ssen Tools') "$($reg.DisplayName) $($reg.DisplayVersion) $($reg.Publisher) $($reg.EstimatedSize)KB"
+Check '앱 목록 등록' ($reg -and $reg.DisplayVersion -eq $VF -and $reg.Publisher -eq 'Ssen Tools') "$($reg.DisplayName) $($reg.DisplayVersion) $($reg.Publisher) $($reg.EstimatedSize)KB"
 $desk = [Environment]::GetFolderPath('Desktop'); $progs = [Environment]::GetFolderPath('Programs')
 Check '바로 가기(바탕화면·시작 메뉴)' ((Test-Path (Join-Path $desk '쎈Cut.lnk')) -and (Test-Path (Join-Path $progs '쎈Cut.lnk')))
 try { $it = (New-Object -ComObject Shell.Application).NameSpace($desk).ParseName('쎈Cut.lnk'); $lnk = $it.GetLink; Check '바로 가기 대상' ($lnk.Path -eq (Join-Path $inst 'SsenCut.exe')) "$($lnk.Path) / 작업 폴더 $($lnk.WorkingDirectory)" } catch { Log "바로 가기 읽기 실패: $_" }
@@ -77,7 +79,7 @@ Start-Process (Join-Path $inst 'SsenCut.exe') -WorkingDirectory $inst
 $ok = WaitFor { (Launchers) -and (EditorWindows) } 40
 $w = EditorWindows | Select-Object -First 1
 Check '실행: 실행기 + Edge 편집 창' $ok "창 제목: $($w.MainWindowTitle)"
-Check '창 제목에 버전' ($w -and $w.MainWindowTitle -like "*쎈Cut $V*") "$($w.MainWindowTitle)"
+Check '창 제목에 버전' ($w -and $w.MainWindowTitle -like "*쎈Cut $VF*") "$($w.MainWindowTitle)"
 Check 'edge-path.txt' (Test-Path (Join-Path $inst 'edge-path.txt')) "$(Get-Content (Join-Path $inst 'edge-path.txt') -ErrorAction SilentlyContinue)"
 Start-Sleep 5; Shot '1-editor'
 Start-Sleep 15  # 시작 15초 뒤 업데이트 확인(같은 버전이면 알림 없음)
@@ -95,6 +97,7 @@ $done = WaitFor { $up.HasExited } 90
 Check '작은 업데이트 끝남·종료 코드 0' ($done -and $up.ExitCode -eq 0) "exit=$($up.ExitCode)"
 $re = WaitFor { (Launchers | Where-Object { $_.Id -ne $before }) -and (EditorWindows) } 40
 Check '업데이트 뒤 쎈Cut 다시 열림' $re "$((EditorWindows | Select-Object -First 1).MainWindowTitle)"
+Check '업데이트 뒤 창 제목이 최신 버전' ((EditorWindows | Select-Object -First 1).MainWindowTitle -like "*쎈Cut $V*") "$V"
 $left = @('app.new', 'app.old', 'SsenCut.exe.new', 'SsenCut.exe.bak', 'payload-version.txt') | Where-Object { Test-Path (Join-Path $inst $_) }
 Check '임시 파일 정리' (-not $left) ($left -join ', ')
 Check '업데이트 뒤 앱 파일' ((Test-Path (Join-Path $inst 'app\index.html')) -and (Test-Path (Join-Path $inst 'app\assets.js'))) ''
