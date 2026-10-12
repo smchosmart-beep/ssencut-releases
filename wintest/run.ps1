@@ -55,7 +55,7 @@ Scan $full '전체 설치본'; Scan $small '작은 업데이트'
 $inst = Join-Path $env:LOCALAPPDATA 'SsenCut'; $key = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\SsenCut'
 $p = Start-Process $full -ArgumentList '/S' -PassThru -Wait
 Check '전체 설치 종료 코드 0' ($p.ExitCode -eq 0) "exit=$($p.ExitCode)"
-$need = @('SsenCut.exe', 'Uninstall.exe', 'README-KO.txt', 'app\index.html', 'app\assets.js', 'app\update-ui.js', 'engine\ssen-mr.exe', 'engine\ssen-align.exe', 'engine\manifest.txt', 'engine\omniasr-ctc-300m-int8.onnx', 'licenses')
+$need = @('SsenCut.exe', 'Uninstall.exe', 'README-KO.txt', 'LICENSE.txt', 'app\index.html', 'app\assets.js', 'app\update-ui.js', 'engine\ssen-mr.exe', 'engine\ssen-align.exe', 'engine\manifest.txt', 'engine\omniasr-ctc-300m-int8.onnx', 'licenses')
 $missing = $need | Where-Object { -not (Test-Path (Join-Path $inst $_)) }
 Check '설치 파일' (-not $missing) ("없음: " + ($missing -join ', '))
 $exeSize = (Get-Item (Join-Path $inst 'SsenCut.exe')).Length; Check '실행기는 작은 exe(앱을 품지 않음)' ($exeSize -lt 1MB) "$exeSize B"
@@ -65,6 +65,12 @@ $desk = [Environment]::GetFolderPath('Desktop'); $progs = [Environment]::GetFold
 Check '바로 가기(바탕화면·시작 메뉴)' ((Test-Path (Join-Path $desk '쎈Cut.lnk')) -and (Test-Path (Join-Path $progs '쎈Cut.lnk')))
 try { $it = (New-Object -ComObject Shell.Application).NameSpace($desk).ParseName('쎈Cut.lnk'); $lnk = $it.GetLink; Check '바로 가기 대상' ($lnk.Path -eq (Join-Path $inst 'SsenCut.exe')) "$($lnk.Path) / 작업 폴더 $($lnk.WorkingDirectory)" } catch { Log "바로 가기 읽기 실패: $_" }
 Get-ChildItem $inst -Recurse -File | Measure-Object Length -Sum | ForEach-Object { Log "설치 폴더 $($_.Count)개 파일, $([math]::Round($_.Sum/1MB))MB" }
+
+# 파일 속성 저작권(1.0.1~)
+$want = 'Copyright 2026 상명초 김승현, 등촌중 김형훈'
+foreach ($f in @($full, $small, (Join-Path $inst 'SsenCut.exe'))) { $lc = (Get-Item $f).VersionInfo.LegalCopyright; Check "파일 속성 저작권: $(Split-Path $f -Leaf)" ($lc -eq $want) "$lc" }
+$lt = Get-Content (Join-Path $inst 'LICENSE.txt') -Raw -Encoding Unicode -ErrorAction SilentlyContinue
+Check '설치 폴더 LICENSE.txt(이용약관)' ($lt -and $lt.Contains('쎈Cut 이용약관') -and $lt.Contains('김승현')) "$($lt.Length)자"
 
 # 3) 실행
 Start-Process (Join-Path $inst 'SsenCut.exe') -WorkingDirectory $inst
