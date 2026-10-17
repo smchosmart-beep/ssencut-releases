@@ -1,0 +1,15 @@
+== 전체 설치본 (D:\a\_temp\ssencut-dl\SsenCut-1.1.0.exe) exit=0
+Scan starting...
+Scan finished.
+Scanning D:\a\_temp\ssencut-dl\SsenCut-1.1.0.exe found no threats.
+
+== 작은 업데이트 (D:\a\_temp\ssencut-dl\SsenCut-1.2.0-small.exe) exit=0
+Scan starting...
+Scan finished.
+Scanning D:\a\_temp\ssencut-dl\SsenCut-1.2.0-small.exe found no threats.
+
+== 설치 폴더 (C:\Users\runneradmin\AppData\Local\SsenCut) exit=0
+Scan starting...
+Scan finished.
+Scanning C:\Users\runneradmin\AppData\Local\SsenCut found no threats.
+

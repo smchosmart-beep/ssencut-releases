@@ -1,0 +1,142 @@
+{
+  "전체 설치본 받기·SHA-256": {
+    "detail": "D:\\a\\_temp\\ssencut-dl\\SsenCut-1.1.0.exe",
+    "ok": true
+  },
+  "작은 업데이트 받기·SHA-256": {
+    "detail": "D:\\a\\_temp\\ssencut-dl\\SsenCut-1.2.0-small.exe",
+    "ok": true
+  },
+  "Defender 검사: 전체 설치본": {
+    "detail": "exit=0 Scanning D:\\a\\_temp\\ssencut-dl\\SsenCut-1.1.0.exe found no threats.\r",
+    "ok": true
+  },
+  "Defender 검사: 작은 업데이트": {
+    "detail": "exit=0 Scanning D:\\a\\_temp\\ssencut-dl\\SsenCut-1.2.0-small.exe found no threats.\r",
+    "ok": true
+  },
+  "전체 설치 종료 코드 0": {
+    "detail": "exit=0",
+    "ok": true
+  },
+  "설치 파일": {
+    "detail": "없음: ",
+    "ok": true
+  },
+  "실행기는 작은 exe(앱을 품지 않음)": {
+    "detail": "90112 B",
+    "ok": true
+  },
+  "앱 목록 등록": {
+    "detail": "쎈Cut 1.1.0 Ssen Tools 547604KB",
+    "ok": true
+  },
+  "바로 가기(바탕화면·시작 메뉴)": {
+    "detail": "",
+    "ok": true
+  },
+  "바로 가기 대상": {
+    "detail": "C:\\Users\\runneradmin\\AppData\\Local\\SsenCut\\SsenCut.exe / 작업 폴더 C:\\Users\\runneradmin\\AppData\\Local\\SsenCut",
+    "ok": true
+  },
+  "파일 속성 저작권: SsenCut-1.1.0.exe": {
+    "detail": "Copyright 2026 상명초 김승현, 등촌중 김형훈",
+    "ok": true
+  },
+  "파일 속성 저작권: SsenCut-1.2.0-small.exe": {
+    "detail": "Copyright 2026 상명초 김승현, 등촌중 김형훈",
+    "ok": true
+  },
+  "파일 속성 저작권: SsenCut.exe": {
+    "detail": "Copyright 2026 상명초 김승현, 등촌중 김형훈",
+    "ok": true
+  },
+  "설치 폴더 LICENSE.txt(이용약관)": {
+    "detail": "2492자",
+    "ok": true
+  },
+  "실행: 실행기 + Edge 편집 창": {
+    "detail": "창 제목: 쎈Cut 1.1.0",
+    "ok": true
+  },
+  "창 제목에 버전": {
+    "detail": "쎈Cut 1.1.0",
+    "ok": true
+  },
+  "edge-path.txt": {
+    "detail": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "ok": true
+  },
+  "작은 업데이트가 쎈Cut이 닫히길 기다림": {
+    "detail": "",
+    "ok": true
+  },
+  "작은 업데이트 끝남·종료 코드 0": {
+    "detail": "exit=0",
+    "ok": true
+  },
+  "업데이트 뒤 쎈Cut 다시 열림": {
+    "detail": "쎈Cut 1.2.0",
+    "ok": true
+  },
+  "업데이트 뒤 창 제목이 최신 버전": {
+    "detail": "1.2.0",
+    "ok": true
+  },
+  "임시 파일 정리": {
+    "detail": "",
+    "ok": true
+  },
+  "업데이트 뒤 앱 파일": {
+    "detail": "",
+    "ok": true
+  },
+  "효과 투명 그리기: 부드러운 빛 번짐": {
+    "detail": "투명 0.596 · 그림 0.4041 · 건너뛰기 평균 14ms ",
+    "ok": true
+  },
+  "효과 투명 그리기: 은은한 보케": {
+    "detail": "투명 0.93 · 그림 0.0705 · 건너뛰기 평균 14ms ",
+    "ok": true
+  },
+  "효과 투명 그리기: 종이 꽃가루": {
+    "detail": "투명 0.988 · 그림 0.0123 · 건너뛰기 평균 17ms ",
+    "ok": true
+  },
+  "효과 투명 그리기: 작은 반짝임": {
+    "detail": "투명 0.997 · 그림 0.0033 · 건너뛰기 평균 10ms ",
+    "ok": true
+  },
+  "효과 투명 그리기: 필름 질감": {
+    "detail": "투명 0.097 · 그림 0.9032 · 건너뛰기 평균 14ms ",
+    "ok": true
+  },
+  "효과 투명 그리기: 잔잔한 눈": {
+    "detail": "투명 0.989 · 그림 0.011 · 건너뛰기 평균 13ms ",
+    "ok": true
+  },
+  "효과 넣은 MP4 내보내기(Edge H.264)": {
+    "detail": "효과 있음 3376ms 1858247B / 효과 없음 2841ms · 완성되었습니다. 아래 다운로드 버튼을 눌러 저장하세요. 1개 파일 준비 완료",
+    "ok": true
+  },
+  "효과 확인 중 화면 오류 없음": {
+    "detail": "",
+    "ok": true
+  },
+  "Defender 검사: 설치 폴더": {
+    "detail": "exit=0 Scanning C:\\Users\\runneradmin\\AppData\\Local\\SsenCut found no threats.\r",
+    "ok": true
+  },
+  "제거: 앱·엔진·실행기 지움": {
+    "detail": "남은 것: ",
+    "ok": true
+  },
+  "제거: 앱 목록·바로 가기": {
+    "detail": "",
+    "ok": true
+  },
+  "Defender 감지 기록 없음": {
+    "detail": "0건(전체)",
+    "ok": true
+  }
+}

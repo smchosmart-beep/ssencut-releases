@@ -1,0 +1,93 @@
+{
+ "effects": [
+  {
+   "id": "warm-light",
+   "name": "부드러운 빛 번짐",
+   "clear": 0.596,
+   "drawn": 0.4041,
+   "seekMs": 14,
+   "width": 1920,
+   "height": 1080,
+   "ok": true,
+   "frameOk": true,
+   "ms": 682
+  },
+  {
+   "id": "soft-bokeh",
+   "name": "은은한 보케",
+   "clear": 0.93,
+   "drawn": 0.0705,
+   "seekMs": 14,
+   "width": 1920,
+   "height": 1080,
+   "ok": true,
+   "frameOk": true,
+   "ms": 166
+  },
+  {
+   "id": "paper-confetti",
+   "name": "종이 꽃가루",
+   "clear": 0.988,
+   "drawn": 0.0123,
+   "seekMs": 17,
+   "width": 1920,
+   "height": 1080,
+   "ok": true,
+   "frameOk": true,
+   "ms": 212
+  },
+  {
+   "id": "fine-sparkles",
+   "name": "작은 반짝임",
+   "clear": 0.997,
+   "drawn": 0.0033,
+   "seekMs": 10,
+   "width": 1920,
+   "height": 1080,
+   "ok": true,
+   "frameOk": true,
+   "ms": 124
+  },
+  {
+   "id": "film-grain",
+   "name": "필름 질감",
+   "clear": 0.097,
+   "drawn": 0.9032,
+   "seekMs": 14,
+   "width": 1920,
+   "height": 1080,
+   "ok": true,
+   "frameOk": true,
+   "ms": 160
+  },
+  {
+   "id": "gentle-snow",
+   "name": "잔잔한 눈",
+   "clear": 0.989,
+   "drawn": 0.011,
+   "seekMs": 13,
+   "width": 1920,
+   "height": 1080,
+   "ok": true,
+   "frameOk": true,
+   "ms": 159
+  }
+ ],
+ "export": {
+  "withFx": {
+   "status": "완성되었습니다. 아래 다운로드 버튼을 눌러 저장하세요.",
+   "toast": "1개 파일 준비 완료",
+   "ms": 3376,
+   "bytes": 1858247
+  },
+  "noFx": {
+   "status": "완성되었습니다. 아래 다운로드 버튼을 눌러 저장하세요.",
+   "toast": "1개 파일 준비 완료",
+   "ms": 2841,
+   "bytes": 79463
+  },
+  "ok": true
+ },
+ "errors": [],
+ "version": "쎈Cut 1.2.0"
+}
