@@ -3,6 +3,7 @@
 #  1) Microsoft Defender 검사(설치 파일 2개)  2) 전체 설치 무인(/S) → 파일·레지스트리·바로 가기
 #  3) 실행 → 실행기·Edge 편집 창(제목 "쎈Cut <버전>") 확인·화면 캡처
 #  4) 쎈Cut이 열린 채로 작은 업데이트 --silent-update → 편집 창 닫기(앱의 [다시 시작해서 적용]과 같은 순서) → 교체·다시 열림 확인
+#  4-1) (1.2.0~) 실제 Edge로 효과 6개 투명 그리기·효과 넣은 MP4 내보내기(fx-check.cjs)
 #  5) 설치 폴더 Defender 검사  6) 제거 무인 → 지워졌는지  7) Defender 감지 기록
 param([string]$Out = "$PWD/wintest-out")
 $ErrorActionPreference = 'Continue'
@@ -102,6 +103,22 @@ $left = @('app.new', 'app.old', 'SsenCut.exe.new', 'SsenCut.exe.bak', 'payload-v
 Check '임시 파일 정리' (-not $left) ($left -join ', ')
 Check '업데이트 뒤 앱 파일' ((Test-Path (Join-Path $inst 'app\index.html')) -and (Test-Path (Join-Path $inst 'app\assets.js'))) ''
 Start-Sleep 3; Shot '3-after-small-update'
+
+# 4-1) 분위기 효과(1.2.0~): 설치된 쎈Cut 화면을 실제 Edge로 열어 효과 6개 투명 그리기 + 실제 MP4 내보내기(wintest/fx-check.cjs)
+if (Test-Path (Join-Path $inst 'app\fx-data.js')) {
+  $pw = Join-Path $env:TEMP "pw-$(Get-Random)"; New-Item -ItemType Directory -Force -Path $pw | Out-Null
+  & npm install --prefix $pw playwright-core@1.47.2 --no-audit --no-fund --loglevel=error 2>&1 | Out-Null
+  $env:NODE_PATH = Join-Path $pw 'node_modules'
+  $fxOut = & node (Join-Path $PSScriptRoot 'fx-check.cjs') $inst $Out 2>&1 | Out-String
+  $m = [regex]::Match($fxOut, 'FXRESULT (\{.*\})')
+  if ($m.Success) {
+    $r = $m.Groups[1].Value | ConvertFrom-Json
+    foreach ($e in $r.effects) { Check "효과 투명 그리기: $($e.name)" ([bool]$e.ok) "투명 $($e.clear) · 그림 $($e.drawn) · 건너뛰기 평균 $($e.seekMs)ms $($e.err)" }
+    $x = $r.export
+    Check '효과 넣은 MP4 내보내기(Edge H.264)' ([bool]($x -and $x.ok)) "효과 있음 $($x.withFx.ms)ms $($x.withFx.bytes)B / 효과 없음 $($x.noFx.ms)ms · $($x.withFx.status) $($x.withFx.toast)"
+    Check '효과 확인 중 화면 오류 없음' (@($r.errors).Count -eq 0) (@($r.errors) -join ' / ')
+  } else { Check '효과 확인 실행' $false (($fxOut -replace '\s+', ' ').Substring(0, [Math]::Min(400, $fxOut.Length))) }
+}
 
 # 5) 설치 폴더 검사
 Scan $inst '설치 폴더'
