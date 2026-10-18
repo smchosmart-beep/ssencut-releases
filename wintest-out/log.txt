@@ -1,0 +1,46 @@
+[07:15:49] Windows: Microsoft Windows Server 2025 Datacenter 10.0.26100.0  매니페스트: https://github.com/smchosmart-beep/ssencut-releases/releases/download/v1.2.2/ssencut-update.json
+[07:15:50] 버전 1.2.2  small 11448633B  full 417917959B
+[07:15:55] PASS 전체 설치본 받기·SHA-256 D:\a\_temp\ssencut-dl\SsenCut-1.1.0.exe
+[07:15:55] PASS 작은 업데이트 받기·SHA-256 D:\a\_temp\ssencut-dl\SsenCut-1.2.2-small.exe
+[07:16:02] Defender: AMService=True 실시간=False 서명=1.461.84.0 (10/18/2026 00:31:20)
+[07:16:02] 클라우드 보호(MAPS)=0 샘플 제출=2
+[07:16:02] 서명 업데이트 실패: Virus and spyware definitions update was completed with errors.
+[07:16:03] PASS Defender 검사: 전체 설치본 exit=0 Scanning D:\a\_temp\ssencut-dl\SsenCut-1.1.0.exe found no threats.
+[07:16:04] PASS Defender 검사: 작은 업데이트 exit=0 Scanning D:\a\_temp\ssencut-dl\SsenCut-1.2.2-small.exe found no threats.
+[07:16:50] PASS 전체 설치 종료 코드 0 exit=0
+[07:16:50] PASS 설치 파일 없음: 
+[07:16:50] PASS 실행기는 작은 exe(앱을 품지 않음) 90112 B
+[07:16:50] PASS 앱 목록 등록 쎈Cut 1.1.0 Ssen Tools 547604KB
+[07:16:50] PASS 바로 가기(바탕화면·시작 메뉴) 
+[07:16:50] PASS 바로 가기 대상 C:\Users\runneradmin\AppData\Local\SsenCut\SsenCut.exe / 작업 폴더 C:\Users\runneradmin\AppData\Local\SsenCut
+[07:16:50] 설치 폴더 76개 파일, 535MB
+[07:16:50] PASS 파일 속성 저작권: SsenCut-1.1.0.exe Copyright 2026 상명초 김승현, 등촌중 김형훈
+[07:16:50] PASS 파일 속성 저작권: SsenCut-1.2.2-small.exe Copyright 2026 상명초 김승현, 등촌중 김형훈
+[07:16:50] PASS 파일 속성 저작권: SsenCut.exe Copyright 2026 상명초 김승현, 등촌중 김형훈
+[07:16:50] PASS 설치 폴더 LICENSE.txt(이용약관) 2492자
+[07:16:53] PASS 실행: 실행기 + Edge 편집 창 창 제목: 쎈Cut 1.1.0
+[07:16:53] PASS 창 제목에 버전 쎈Cut 1.1.0
+[07:16:53] PASS edge-path.txt C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe
+[07:17:00] 화면 캡처 1-editor.png
+[07:17:15] 화면 캡처 2-after-update-check.png
+[07:17:15] update-settings.json: {"auto":true,"skipped":"","lastCheck":1792307827533}
+[07:17:17] PASS 작은 업데이트가 쎈Cut이 닫히길 기다림 
+[07:17:21] PASS 작은 업데이트 끝남·종료 코드 0 exit=0
+[07:17:22] PASS 업데이트 뒤 쎈Cut 다시 열림 쎈Cut 1.2.2
+[07:17:22] PASS 업데이트 뒤 창 제목이 최신 버전 1.2.2
+[07:17:22] PASS 임시 파일 정리 
+[07:17:22] PASS 업데이트 뒤 앱 파일 
+[07:17:25] 화면 캡처 3-after-small-update.png
+[07:17:57] PASS 효과 투명 그리기: 부드러운 빛 번짐 투명 0.364 · 그림 0.6362 · 건너뛰기 평균 23ms 
+[07:17:57] PASS 효과 투명 그리기: 은은한 보케 투명 0.93 · 그림 0.0705 · 건너뛰기 평균 23ms 
+[07:17:57] PASS 효과 투명 그리기: 종이 꽃가루 투명 0.988 · 그림 0.0123 · 건너뛰기 평균 27ms 
+[07:17:57] PASS 효과 투명 그리기: 작은 반짝임 투명 0.971 · 그림 0.0295 · 건너뛰기 평균 25ms 
+[07:17:57] PASS 효과 투명 그리기: 필름 질감 투명 0 · 그림 0.96 · 건너뛰기 평균 0ms 
+[07:17:57] PASS 효과 투명 그리기: 잔잔한 눈 투명 0.989 · 그림 0.011 · 건너뛰기 평균 20ms 
+[07:17:57] PASS 효과 넣은 MP4 내보내기(Edge H.264) 효과 있음 5312ms 1859460B / 효과 없음 4569ms · 완성되었습니다. 아래 다운로드 버튼을 눌러 저장하세요. 1개 파일 준비 완료
+[07:17:57] PASS 효과 확인 중 화면 오류 없음 
+[07:17:58] PASS Defender 검사: 설치 폴더 exit=0 Scanning C:\Users\runneradmin\AppData\Local\SsenCut found no threats.
+[07:17:58] PASS 제거: 앱·엔진·실행기 지움 남은 것: 
+[07:17:58] PASS 제거: 앱 목록·바로 가기 
+[07:17:59] PASS Defender 감지 기록 없음 0건(전체)
+[07:17:59] 결과: 실패 0건 / 35개
