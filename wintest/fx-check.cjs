@@ -24,6 +24,12 @@ const [inst, out] = process.argv.slice(2);
       for (const e of CutFx.list()) {
         const t0 = performance.now(), r = { id: e.id, name: e.name };
         try {
+          if (e.code) { // 1.2.1~ 필름 질감: 파일 없이 화면이 그림
+            const cv = document.createElement('canvas'); cv.width = 480; cv.height = 270; const g = cv.getContext('2d'); g.fillStyle = '#808080'; g.fillRect(0, 0, 480, 270);
+            CutRender.fx(g, { id: 'x', effectId: e.id, start: 0, duration: 8, in: 0, opacity: 1, fadeIn: 0, fadeOut: 0 }, 3, 480, 270, new Map());
+            const d = g.getImageData(0, 0, 480, 270).data; let ch = 0; for (let i = 0; i < d.length; i += 4) if (d[i] !== 128) ch++;
+            r.code = true; r.drawn = +(ch / (d.length / 4)).toFixed(3); r.clear = 0; r.seekMs = 0; r.ok = r.drawn > 0.3; r.ms = Math.round(performance.now() - t0); outList.push(r); continue;
+          }
           const v = document.createElement('video'); v.muted = true; v.src = await CutFx.url(e.id);
           await new Promise((ok, no) => { v.onloadeddata = ok; v.onerror = () => no(Error('video error ' + (v.error && v.error.code))); setTimeout(() => no(Error('load timeout')), 20000); });
           let seekMs = 0;
